@@ -399,7 +399,7 @@ unsigned short AllocEntity( int classnum, unsigned short entnum ) {
 /* ---- AllocThread  0x004715C0 ---- VERIFIED
    Retail inlines this into VM_Execute (self read before AllocVariable); VC7 only
    does so here with __forceinline. The out-of-line copy is unchanged. */
-__forceinline unsigned short AllocThread( unsigned short self ) {
+unsigned short AllocThread( unsigned short self ) {
 	VariableValueInternal *node = AllocVariable();
 
 	node->status = VAR_PACKED_THREAD;

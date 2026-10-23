@@ -7,6 +7,12 @@
 
 #include <math.h>
 
+/* The pool objects are defined with C linkage in FxMemMgr.cpp; keep these
+ * initializers matching so the linker resolves them. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * The primitive block pools.  Each is { elements per 32K block, free list },
  * handed to the FxPool_Alloc / FxPool_Free helpers.  The objects live with the
@@ -140,3 +146,7 @@ static fxPrimitivesStaticInit_t fxPrimitivesStaticInit[] = {
 	fxPool_Decal_static_init,
 };
 #pragma data_seg()
+
+#ifdef __cplusplus
+}
+#endif

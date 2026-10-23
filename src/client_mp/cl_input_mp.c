@@ -30,6 +30,14 @@ int cl_lastStandTime;
 int cl_oldFrameTime;                /* old_com_frameTime */
 unsigned int frame_msecStorage;   /* 0x0142F608, frame_msec */
 
+/* cl_local.h declares these; retail keeps the input ring and the current
+ * server id in this unit's tail (0x0143A948..0x0143A9AC). */
+int cl_mouseDx[11];                 /* 0x0143A948 */
+int cl_mouseDy[9];                  /* 0x0143A950 */
+int cl_mouseIndex;                  /* 0x0143A958 */
+int cl_joystickAxis[6];             /* 0x0143A95C */
+int cl_serverId;                    /* 0x0143A9AC */
+
 extern void CL_Netchan_Encode( byte *data, int length );
 extern void MSG_SetDefaultUserCmd( const byte *ps, usercmd_t *ucmd );
 extern void MSG_WriteBits( msg_t *msg, int value, int bits );

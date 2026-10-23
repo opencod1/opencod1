@@ -122,6 +122,15 @@ typedef void (__fastcall *FxEffectDeleteFn)( void *self, float deleteFlagBits );
 void __cdecl stl_fxScheduledList_dtor_m( int list );
 int  __cdecl stl_fxEffectIdMap_tidy_m( int tree );
 
+/* Forward declarations for reconstructed helpers that are defined later in
+ * this translation unit.  C++ has no implicit function declarations, so the
+ * calls below need these prototypes; VC7's permissive mode masked the issue. */
+void __cdecl stl_fxEffectIdMap_clear_m( int tree );
+int  __stdcall stl_fxScheduledList_pushFront_m( int list, unsigned int *value );
+void __stdcall stl_fxIntVector_nop3_m( int unused1, int unused2 );
+char *__cdecl stl_fxChar_swap_m( char *a, char *b );
+char __cdecl stl_fxIntVector_buy_m( unsigned int count, unsigned int *vec );
+
 #include "../renderer/qgl.h"
 #include "../universal/com_sndalias.h"
 /* The refexport_t slots the decompiled callers use unprototyped (int (*)()
@@ -686,19 +695,19 @@ int   __stdcall  stl_fxEffectIdMap_buynode_m( int tree, int left, int parent, in
 void  __stdcall  SFxHelper__PlaySound( int aliasIndex, const void *helper, float *origin, int entnum );
 void  __stdcall  SFxHelper__AddLightToScene( int unusedThis, const float *origin, float intensity,
                                              float red, float green, float blue );
-__inline int __cdecl FxPool_MakeBlockCurrentBoltFrame( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentModel( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentLight( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentParticle( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentLine( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentElectricity( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentOrientedParticle( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentTail( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentCylinder( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentEmitter( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentDecal( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentPrimitiveTemplate( int pool, int block );
-__inline int __cdecl FxPool_MakeBlockCurrentScheduledEffect( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentBoltFrame( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentModel( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentLight( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentParticle( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentLine( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentElectricity( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentOrientedParticle( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentTail( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentCylinder( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentEmitter( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentDecal( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentPrimitiveTemplate( int pool, int block );
+int __cdecl FxPool_MakeBlockCurrentScheduledEffect( int pool, int block );
 void  __cdecl    CPrimitiveTemplate__copy_m( char *dst, char *src );
 int   __cdecl    CParticle__UpdateRotation( int self );
 int   __cdecl    CParticle__UpdateRGB( int self );
@@ -4572,7 +4581,7 @@ unsigned int *__fastcall FxPool_FreeDecal( int *pool, char *p )
 }
 
 /* ---- FxPool_MakeBlockCurrentBoltFrame  0x00491F90 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentBoltFrame(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentBoltFrame(int pool, int block)
 {
   int next;
   int prev;
@@ -4595,7 +4604,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentBoltFrame(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentModel  0x00491FF0 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentModel(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentModel(int pool, int block)
 {
   int next;
   int prev;
@@ -4618,7 +4627,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentModel(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentLight  0x004920B0 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentLight(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentLight(int pool, int block)
 {
   int next;
   int prev;
@@ -4641,7 +4650,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentLight(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentParticle  0x00492110 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentParticle(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentParticle(int pool, int block)
 {
   int next;
   int prev;
@@ -4664,7 +4673,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentParticle(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentLine  0x00492170 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentLine(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentLine(int pool, int block)
 {
   int next;
   int prev;
@@ -4687,7 +4696,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentLine(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentElectricity  0x004921D0 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentElectricity(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentElectricity(int pool, int block)
 {
   int next;
   int prev;
@@ -4710,7 +4719,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentElectricity(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentOrientedParticle  0x00492230 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentOrientedParticle(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentOrientedParticle(int pool, int block)
 {
   int next;
   int prev;
@@ -4733,7 +4742,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentOrientedParticle(int pool, int block
 }
 
 /* ---- FxPool_MakeBlockCurrentTail  0x00492290 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentTail(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentTail(int pool, int block)
 {
   int next;
   int prev;
@@ -4756,7 +4765,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentTail(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentCylinder  0x004922F0 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentCylinder(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentCylinder(int pool, int block)
 {
   int next;
   int prev;
@@ -4779,7 +4788,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentCylinder(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentEmitter  0x00492350 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentEmitter(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentEmitter(int pool, int block)
 {
   int next;
   int prev;
@@ -4802,7 +4811,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentEmitter(int pool, int block)
 }
 
 /* ---- FxPool_MakeBlockCurrentDecal  0x004923B0 ----  VERIFIED */
-__inline int __cdecl FxPool_MakeBlockCurrentDecal(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentDecal(int pool, int block)
 {
   int next;
   int prev;
@@ -4914,9 +4923,25 @@ typedef struct {unsigned int flags;} FxCrtDeletingFlags;
 /* The global placement operator delete(void *, void *): it does nothing, and is
  * reached only from the unwind action of a placement new-expression whose
  * constructor throws (_Buynode's node construction).  <new> declares it
- * throw(); the definition leaves that out so exe_layout sees it as "delete". */
+ * throw(); the definition leaves that out so exe_layout sees it as "delete".
+ * Modern MSVC already defines this inline in <new>; VC7 did not. */
+#if !defined(_MSC_VER) || _MSC_VER < 1900
 void __cdecl operator delete( void *, void * )
 {
+}
+#endif
+
+/* VC7's libcpmt supplied std::_String_base::_Xlen/_Xran.  Modern MSVC no
+ * longer has that class, so define the two out-of-line members here with
+ * retail's messages; the reconstructed string code calls them directly. */
+void std::_String_base::_Xlen() const
+{
+  throw std::length_error( "string too long" );
+}
+
+void std::_String_base::_Xran() const
+{
+  throw std::out_of_range( "invalid string position" );
 }
 
 /* The members of std::logic_error / length_error / out_of_range (classes in
@@ -8214,7 +8239,7 @@ unsigned int *__fastcall stl_fxIntVector_iterAdd_m(unsigned int *result, unsigne
 
 /* ---- FxPool_MakeBlockCurrentPrimitiveTemplate  0x00497E80 ----  VERIFIED */
 /* Unlink a block from its freelist and make it the pool's current block. */
-__inline int __cdecl FxPool_MakeBlockCurrentPrimitiveTemplate(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentPrimitiveTemplate(int pool, int block)
 {
   int next;
   int prev;
@@ -8235,7 +8260,7 @@ __inline int __cdecl FxPool_MakeBlockCurrentPrimitiveTemplate(int pool, int bloc
 
 /* ---- FxPool_MakeBlockCurrentScheduledEffect  0x00497EE0 ----  VERIFIED */
 /* Unlink a block from its freelist and make it the pool's current block. */
-__inline int __cdecl FxPool_MakeBlockCurrentScheduledEffect(int pool, int block)
+int __cdecl FxPool_MakeBlockCurrentScheduledEffect(int pool, int block)
 {
   int next;
   int prev;
@@ -10357,7 +10382,6 @@ void __stdcall SFxHelper__PlaySound( int aliasIndex, const void *helper, float *
 
 
   MSS_PlaySoundAlias_Internal( alias, (float *)alias, 0.0f, entnum, origin, 0, 0 );
-#line 10537 "F:\\2026\\opencod1-vanilla\\src\\EffectsCore\\fx_unassigned.cpp"
 }
 
 /* ---- SFxHelper__Trace  0x0049A220 ----  VERIFIED */

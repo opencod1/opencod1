@@ -7,6 +7,12 @@
 
 #include <math.h>
 
+/* The pool objects are defined with C linkage in FxMemMgr.cpp; keep these
+ * initializers matching so the linker resolves them. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * The scheduler's two block pools ({ elements per 32K block, free list }, see
  * FxPrimitives.cpp), defined with the arena in FxMemMgr.cpp; retail keeps them
@@ -41,3 +47,7 @@ static fxSchedulerStaticInit_t fxSchedulerStaticInit[] = {
 	fxPool_ScheduledEffect_static_init,
 };
 #pragma data_seg()
+
+#ifdef __cplusplus
+}
+#endif

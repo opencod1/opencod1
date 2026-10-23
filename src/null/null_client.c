@@ -156,3 +156,20 @@ void CL_AddDebugString( const float *origin, const float *color, float scale,
 void CL_FlushDebugData( int fromServer ) {
 	(void)fromServer;
 }
+
+/* server_mp/sv_game_mp.c asks the client whether a DObj's skeleton is current;
+ * the dedicated server has no renderer, so report "not up to date". */
+qboolean CL_DObjSkelAreBonesUpToDate( int dobj, const int *partBits ) {
+	(void)dobj; (void)partBits;
+	return qfalse;
+}
+
+/* miles/ is not linked into the dedicated server, but the shared FX unit still
+ * names its sound entry point.  Silence it. */
+int __cdecl MSS_PlaySoundAlias_Internal( void *alias, float *alias2, float blend,
+                                         int entnum, float *origin, int *outChan,
+                                         int startMs ) {
+	(void)alias; (void)alias2; (void)blend; (void)entnum;
+	(void)origin; (void)outChan; (void)startMs;
+	return 0;
+}

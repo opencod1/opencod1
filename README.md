@@ -32,7 +32,12 @@ Python or other tooling is required.
 1. **Clone** the repository.
 2. Run **`generate.bat`** to generate the Visual Studio solution. To target a
    different toolset, pass the premake action, e.g. `generate.bat vs2019`.
-3. Open **`src/opencod1.sln`** and build.
+3. Open **`src/opencod1.sln`** and build it in Visual Studio.
+
+   - Alternatively, install the [**Build Tools for Visual Studio 2022**](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2022-and-other-products) and compile via the console by running the following in the `Developer Command Prompt for VS 2022`:
+      1. `generate.bat vs2022`
+      2. `MSBuild.exe src\opencod1.sln /m /p:Configuration=Release /p:Platform=Win32`
+
 
 Output lands in:
 
@@ -49,6 +54,3 @@ Output lands in:
 1. Copy the **`build/CodMP.exe`** into your Call of Duty 1 folder.
 2. Copy the three DLLs from **`build/main/`** into the game's **`main/`** folder.
 3. Run **`CodMP.exe`**.
-
-
-

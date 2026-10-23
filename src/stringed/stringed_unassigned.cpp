@@ -299,7 +299,9 @@ struct SeStrIter
  * action of a placement new-expression whose constructor throws calls. */
 extern "C++"
 {
+#if !defined(_MSC_VER) || _MSC_VER < 1900
 inline void *__cdecl operator new( size_t, void *where ) throw() { return where; }
+#endif
 void __cdecl operator delete( void *, void * ) throw();
 }
 
@@ -396,6 +398,13 @@ public:
 #define SE_STR( s )       ( (seStlStr_t *)&(s) )
 
 extern "C" {
+
+/* Forward declarations for reconstructed helpers that are defined later in
+ * this translation unit.  C++ has no implicit function declarations, so the
+ * calls below need these prototypes; VC7's permissive mode masked the issue. */
+unsigned int __stdcall stl_string_find_cstr_m( char *needle, seStlStr_t *str, unsigned int startPos );
+seStlStr_t *__cdecl stl_vector_ufill_n_m( void *vec, seStlStr_t *ptr, unsigned int count, seStlStr_t *val );
+int __stdcall stl_string_tidy_m( seStlStr_t *self, int unused );
 
 /* The containers' _Xlen / erase(end()) paths throw std::length_error /
  * std::out_of_range (fx_types.h; members in fx_unassigned.cpp):
@@ -801,6 +810,7 @@ COD1_STATIC_ASSERT(offsetof(seStlVec_t, first) == 0x04, "seStlVec_t.first");
 COD1_STATIC_ASSERT(offsetof(seStlVec_t, last)  == 0x08, "seStlVec_t.last");
 COD1_STATIC_ASSERT(offsetof(seStlVec_t, end)   == 0x0C, "seStlVec_t.end");
 COD1_ASSERT_SIZE(seStlVec_t, 0x10);
+int __cdecl stl_vector_size_m( seStlVec_t *thisPtr );
 
 /* The language list SE_GetNumLanguages__Fv builds (retail 0x014074F4, a
  * std::vector<std::string> just past TheStringPackage), read back by

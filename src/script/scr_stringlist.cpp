@@ -9,6 +9,12 @@
  * @fidelity: verified
  */
 
+#ifdef __cplusplus
+/* This unit is C; the build compiles it as C++ for the shared project
+ * settings, so force C linkage for every definition. */
+extern "C" {
+#endif
+
 #include "scr_local.h"
 #include <malloc.h>
 
@@ -539,3 +545,7 @@ scrStringEntry_t *GetRefString__FPCc( const char *text ) {
 void CreateCanonicalFilename__FPcPCci( char *dest, const char *source, int maxLength ) {
 	CreateCanonicalFilename( dest, source, maxLength );
 }
+
+#ifdef __cplusplus
+}
+#endif
